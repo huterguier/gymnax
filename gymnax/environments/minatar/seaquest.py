@@ -48,7 +48,7 @@ class EnvParams(environment.EnvParams):
     enemy_shot_interval: int = 10
     enemy_move_interval: int = 5
     diver_move_interval: int = 5
-    max_steps_in_episode: int = 1000
+    max_steps_in_episode: int = 100000
 
 
 class MinSeaquest(environment.Environment[EnvState, EnvParams]):

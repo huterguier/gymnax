@@ -51,7 +51,7 @@ class EnvParams(environment.EnvParams):
     init_spawn_speed: int = 10
     init_move_interval: int = 5
     shot_cool_down: int = 5
-    max_steps_in_episode: int = 1000
+    max_steps_in_episode: int = 100000
 
 
 class MinAsterix(environment.Environment[EnvState, EnvParams]):

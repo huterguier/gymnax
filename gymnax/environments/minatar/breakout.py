@@ -25,7 +25,7 @@ class EnvState(environment.EnvState):
 
 @struct.dataclass
 class EnvParams(environment.EnvParams):
-    max_steps_in_episode: int = 1000
+    max_steps_in_episode: int = 100000
 
 
 class MinBreakout(environment.Environment[EnvState, EnvParams]):
