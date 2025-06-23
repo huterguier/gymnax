@@ -18,6 +18,7 @@ TEnvParams = TypeVar("TEnvParams", bound="EnvParams")
 @struct.dataclass
 class EnvState:
     time: int
+    last_action: jax.Array
 
 
 @struct.dataclass
@@ -45,7 +46,12 @@ class Environment(Generic[TEnvState, TEnvParams]):
             params = self.default_params
 
         # Step
-        key_step, key_reset = jax.random.split(key)
+        key_step, key_act, key_reset = jax.random.split(key)
+        action = jax.lax.cond(
+            jax.random.uniform(key_act) < 0.1,
+            lambda: state.last_action,
+            lambda: action,
+        )
         obs_st, state_st, reward, done, info = self.step_env(
             key_step, state, action, params
         )
@@ -56,6 +62,7 @@ class Environment(Generic[TEnvState, TEnvParams]):
             lambda x, y: jax.lax.select(done, x, y), state_re, state_st
         )
         obs = jax.lax.select(done, obs_re, obs_st)
+        state.last_action = action
 
         return obs, state, reward, done, info
 
