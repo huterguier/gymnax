@@ -135,6 +135,7 @@ class MinAsterix(environment.Environment[EnvState, EnvParams]):
             ramp_index=0,
             entities=jnp.zeros((8, 5), dtype=int),
             time=0,
+            last_action=jnp.array(0, dtype=jnp.int32),
             terminal=False,
         )
         return self.get_obs(state), state

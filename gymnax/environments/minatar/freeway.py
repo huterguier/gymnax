@@ -116,6 +116,7 @@ class MinFreeway(environment.Environment[EnvState, EnvParams]):
             cars=randomize_cars(speeds, directions, jnp.zeros((8, 4), dtype=int), True),
             move_timer=params.player_speed,
             time=0,
+            last_action=jnp.array(0, dtype=jnp.int32),
             terminal=False,
         )
         return self.get_obs(state), state

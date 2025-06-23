@@ -46,7 +46,7 @@ class Environment(Generic[TEnvState, TEnvParams]):
             params = self.default_params
 
         # Step
-        key_step, key_act, key_reset = jax.random.split(key)
+        key_step, key_act, key_reset = jax.random.split(key, 3)
         action = jax.lax.cond(
             jax.random.uniform(key_act) < 0.1,
             lambda: state.last_action,
@@ -62,7 +62,7 @@ class Environment(Generic[TEnvState, TEnvParams]):
             lambda x, y: jax.lax.select(done, x, y), state_re, state_st
         )
         obs = jax.lax.select(done, obs_re, obs_st)
-        state.last_action = action
+        state = state.replace(last_action=action)
 
         return obs, state, reward, done, info
 

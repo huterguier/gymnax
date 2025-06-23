@@ -109,6 +109,7 @@ class MinBreakout(environment.Environment[EnvState, EnvParams]):
             last_y=jnp.array(3),
             last_x=jnp.array([0, 9])[ball_start],
             time=0,
+            last_action=jnp.array(0, dtype=jnp.int32),
             terminal=False,
         )
         return self.get_obs(state), state

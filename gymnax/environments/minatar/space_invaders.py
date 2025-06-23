@@ -124,6 +124,7 @@ class MinSpaceInvaders(environment.Environment[EnvState, EnvParams]):
             ramp_index=ramp_index,
             alien_map=alien_map,
             time=time,
+            last_action=jnp.array(a, dtype=jnp.int32),
             terminal=terminal,
         )
 
